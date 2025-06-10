@@ -12,3 +12,29 @@
     Output: false
   
  */
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if( t.contains(s) ) return true;
+
+        int currentIndex = t.indexOf( String.valueOf( s.charAt(0) ) );
+        if( currentIndex < 0) return false;
+
+        t = t.replaceFirst( String.valueOf( s.charAt(0) ), "");
+
+        for(int i = 1; i < s.length(); i++){
+            int nextIndex = t.indexOf( String.valueOf( s.charAt(i) ) );
+
+            if (i + 1 == s.length() && nextIndex != t.lastIndexOf( String.valueOf( s.charAt(i) ) ) ){
+                nextIndex = t.lastIndexOf( String.valueOf( s.charAt(i) ) );
+            }
+
+            if( nextIndex < 0 || currentIndex > nextIndex) return false;
+
+            t = t.replaceFirst( String.valueOf( s.charAt(i) ), "");
+          
+            currentIndex = nextIndex;
+        }
+
+        return true;
+    }
+}
