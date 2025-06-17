@@ -27,6 +27,26 @@ All occurrences of a character must be replaced with another character while pre
 
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        
+        char[] sToTMap = new char[256]; 
+        char[] tToSMap = new char[256]; 
+
+        for (int i = 0; i < s.length(); i++) {
+            char charS = s.charAt(i);
+            char charT = t.charAt(i);
+
+            if (sToTMap[charS] == 0) { 
+                sToTMap[charS] = charT; 
+            } else {
+                if (sToTMap[charS] != charT) return false;
+            }
+
+            if (tToSMap[charT] == 0) {
+                tToSMap[charT] = charS; 
+            } else {
+                if (tToSMap[charT] != charS) return false;
+            }
+        }
+
+        return true; 
     }
 }
